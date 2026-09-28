@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agent Orchestrator"
+  short_description: "按依赖拆分任务并调度子智能体，由主智能体验收与整合成果"
+  default_prompt: "使用 $agent-orchestrator 理解我的任务，按需拆分和调度子智能体，验收后统一交付。"

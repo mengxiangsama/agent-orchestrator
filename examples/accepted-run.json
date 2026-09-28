@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "mode": "implement",
+  "limits": {"max_active": 2, "max_attempts": 2},
+  "tasks": [
+    {"id": "D", "owner": "designer", "depends_on": [], "write_paths": ["docs/design.md"], "deliverables": ["docs/design.md"], "acceptance": ["明确接口和业务规则"]},
+    {"id": "I", "owner": "implementer", "depends_on": ["D"], "write_paths": ["src/payment.py", "tests/test_payment.py"], "deliverables": ["src/payment.py", "tests/test_payment.py"], "acceptance": ["符合已验收设计并通过测试"]},
+    {"id": "G", "owner": "main", "depends_on": ["I"], "write_paths": [], "deliverables": ["集成报告"], "acceptance": ["检查范围和集成测试"]}
+  ],
+  "events": [
+    {"task": "D", "event": "start", "actor": "main", "inputs": {}},
+    {"task": "D", "event": "submit", "actor": "designer", "evidence": ["示例设计文档提交（非真实运行记录）"]},
+    {"task": "D", "event": "accept", "actor": "main", "revision": 1, "evidence": ["示例：主智能体检查规则与接口"]},
+    {"task": "I", "event": "start", "actor": "main", "inputs": {"D": 1}},
+    {"task": "I", "event": "submit", "actor": "implementer", "evidence": ["示例实现与测试报告提交"]},
+    {"task": "I", "event": "accept", "actor": "main", "revision": 1, "evidence": ["示例：主智能体检查实际差异并复测"]},
+    {"task": "G", "event": "start", "actor": "main", "inputs": {"I": 1}},
+    {"task": "G", "event": "submit", "actor": "main", "evidence": ["示例集成报告"]},
+    {"task": "G", "event": "accept", "actor": "main", "revision": 1, "evidence": ["示例：对照原始需求检查最终交付"]}
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "mode": "implement",
+  "limits": {"max_active": 2, "max_attempts": 2},
+  "tasks": [
+    {"id": "V1", "owner": "worker-checker", "depends_on": [], "write_paths": ["scripts/check_ledger.py", "tests/test_ledger.py", "tests/__init__.py"], "deliverables": ["记录校验器及测试"], "acceptance": ["符合v1契约、标准库、真实测试通过"], "status": "accepted"},
+    {"id": "E1", "owner": "worker-examples", "depends_on": [], "write_paths": ["examples/scenarios.md", "examples/coupon-order-payment.md"], "deliverables": ["两份教学案例"], "acceptance": ["无虚构运行结果、规则来源清楚、本地链接有效"], "status": "accepted"},
+    {"id": "D1", "owner": "worker-coupon", "depends_on": [], "write_paths": ["evals/artifacts/coupon/docs/design.md"], "deliverables": ["报价设计"], "acceptance": ["覆盖明确规则，原业务文件不变"], "status": "accepted"},
+    {"id": "S1", "owner": "worker-simple", "depends_on": [], "write_paths": ["evals/artifacts/simple/output.txt"], "deliverables": ["ready文本"], "acceptance": ["正确转换且无不必要委派"], "status": "accepted"},
+    {"id": "I1", "owner": "worker-coupon", "depends_on": ["D1"], "write_paths": ["evals/artifacts/coupon/src/payment.py", "evals/artifacts/coupon/tests/test_quote.py"], "deliverables": ["报价实现和测试"], "acceptance": ["符合D1 v1，工作者测试及主智能体oracle通过"], "status": "accepted"},
+    {"id": "L1", "owner": "worker-restricted", "depends_on": [], "write_paths": ["evals/artifacts/restricted/zh.md", "evals/artifacts/restricted/en.md"], "deliverables": ["中文和英文3步说明"], "acceptance": ["禁委派条件下真实单智能体完成并说明限制"], "status": "accepted"},
+    {"id": "F1", "owner": "worker-restricted", "depends_on": [], "write_paths": [], "deliverables": ["输入检查结果"], "acceptance": ["实际退出码0才允许生成汇总"], "status": "failed"},
+    {"id": "G1", "owner": "main", "depends_on": ["V1", "E1", "D1", "S1", "I1", "L1"], "write_paths": ["evals/reports"], "deliverables": ["验证报告和脱敏观察记录"], "acceptance": ["实读交付物、主智能体复测、明确失败注入与未验证边界"], "status": "accepted"}
+  ],
+  "events": [
+    {"task": "V1", "event": "start", "actor": "main", "inputs": {}},
+    {"task": "E1", "event": "start", "actor": "main", "inputs": {}},
+    {"task": "V1", "event": "submit", "actor": "worker-checker", "evidence": ["校验器和测试真实文件"]},
+    {"task": "V1", "event": "accept", "actor": "main", "revision": 1, "evidence": ["读取脚本实现；49项记录测试复测通过"]},
+    {"task": "D1", "event": "start", "actor": "main", "inputs": {}},
+    {"task": "E1", "event": "submit", "actor": "worker-examples", "evidence": ["两份示例文件及文档检查报告"]},
+    {"task": "E1", "event": "accept", "actor": "main", "revision": 1, "evidence": ["主智能体阅读内容，包检查通过；没有宣称业务测试完成"]},
+    {"task": "S1", "event": "start", "actor": "main", "inputs": {}},
+    {"task": "D1", "event": "submit", "actor": "worker-coupon", "evidence": ["docs/design.md提交，未实现quote"]},
+    {"task": "D1", "event": "accept", "actor": "main", "revision": 1, "evidence": ["设计逐项检查；原业务文件哈希不变，具体SHA256见validation.md"]},
+    {"task": "I1", "event": "start", "actor": "main", "inputs": {"D1": 1}},
+    {"task": "S1", "event": "submit", "actor": "worker-simple", "evidence": ["output.txt实际内容ready"]},
+    {"task": "S1", "event": "accept", "actor": "main", "revision": 1, "evidence": ["主智能体读文件并检查工具调用记录；无额外创建"]},
+    {"task": "L1", "event": "start", "actor": "main", "inputs": {}},
+    {"task": "L1", "event": "submit", "actor": "worker-restricted", "evidence": ["zh.md/en.md各3步；说明本轮禁止委派"]},
+    {"task": "L1", "event": "accept", "actor": "main", "revision": 1, "evidence": ["读取中英文文档、核对3步和语义；工具调用记录无委派"]},
+    {"task": "F1", "event": "start", "actor": "main", "inputs": {}},
+    {"task": "F1", "event": "fail", "actor": "worker-restricted", "reason": "人为故障注入的check_input.py退出7；仅执行一次，summary.md未生成"},
+    {"task": "I1", "event": "submit", "actor": "worker-coupon", "evidence": ["首次提交16项测试通过；主智能体另跑9项oracle通过"]},
+    {"task": "I1", "event": "reject", "actor": "main", "reason": "验收演练：测试者在提交后人为改错优惠上限，反例20!=0，exit1。并非声称原提交自然出错。"},
+    {"task": "I1", "event": "start", "actor": "main", "inputs": {"D1": 1}, "reason": "真实发送返工消息，要求按不变D1 v1修复注入错误，禁止削弱断言，剩余一次尝试"},
+    {"task": "I1", "event": "submit", "actor": "worker-coupon", "evidence": ["恢复商品额优惠上限并添加专门回归测试"]},
+    {"task": "I1", "event": "accept", "actor": "main", "revision": 1, "evidence": ["主智能体重新读取代码；17项工作者测试+9项独立oracle均通过；设计哈希不变"]},
+    {"task": "G1", "event": "start", "actor": "main", "inputs": {"V1": 1, "E1": 1, "D1": 1, "S1": 1, "I1": 1, "L1": 1}},
+    {"task": "G1", "event": "submit", "actor": "main", "evidence": ["验证报告、脱敏夹具、作用范围和未验证项"]},
+    {"task": "G1", "event": "accept", "actor": "main", "revision": 1, "evidence": ["整包55项+报价26项本地测试通过；故障F1保留failed而非伪装成功"]}
+  ]
+}

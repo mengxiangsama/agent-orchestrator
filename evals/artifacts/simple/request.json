@@ -1,0 +1,6 @@
+{
+  "request": "读取 input.txt，去掉首尾空白并转成小写，写入 output.txt。",
+  "input_utf8": "  READY  \n",
+  "observed_output_utf8": "ready\n",
+  "nested_agent_creations_observed": 0
+}

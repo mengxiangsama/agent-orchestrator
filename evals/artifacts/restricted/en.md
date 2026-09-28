@@ -1,0 +1,5 @@
+# Hand a task to the main agent and verify the results
+
+1. Submit the task to the main agent: specify the goal, context, input materials, permitted directories, deliverable files, and acceptance criteria, such as “Create Chinese and English instructions with exactly 3 steps each.”
+2. Define the execution boundaries: state whether delegation to assistants is authorized and specify restrictions on network access and publishing. When delegation is allowed, the main agent assigns responsibilities and file ownership; when prohibited, it completes the work in stages and accurately records how it was performed. Dependent tasks may begin only after the main agent accepts their prerequisites.
+3. Have the main agent verify the deliverables: require it to open the actual files, check their content, language, step count, and compliance with the permitted scope, and confirm that both versions agree. It must correct and recheck any failures, then provide the file paths, verification results, and actual execution method. An assistant reporting completion alone does not establish acceptance.

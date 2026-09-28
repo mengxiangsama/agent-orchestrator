@@ -1,0 +1,30 @@
+name: Validate skill and records
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  validate:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python: ['3.12']
+        include:
+          - os: ubuntu-latest
+            python: '3.9'
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python scripts/validate_package.py
+      - run: python -B -m unittest discover -s tests -v
+      - run: python scripts/check_ledger.py examples/accepted-run.json
+      - run: python scripts/check_ledger.py evals/reports/observed-run.json
+      - run: python -B -m unittest discover -s tests -v
+        working-directory: evals/artifacts/coupon
+      - run: python -B -m unittest discover -s oracle -v
+        working-directory: evals/artifacts/coupon
