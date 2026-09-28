@@ -47,7 +47,7 @@ python3 -B -m unittest discover -s tests -v
 python3 -B -m unittest discover -s oracle -v
 ```
 
-上述本地命令最终均退出0。CI 配置同样运行这些检查，跨平台结果以对应提交的 [GitHub Actions](https://github.com/mengxiangsama/agent-orchestrator/actions) 为准；本报告不提前宣称尚未运行的 CI 成功。
+上述本地命令最终均退出0。首个发布提交 `2bd7544` 的 [CI 运行](https://github.com/mengxiangsama/agent-orchestrator/actions/runs/36408800745) 已真实完成：Ubuntu/macOS/Windows + Python 3.12，以及 Ubuntu + Python 3.9，四个组合全部通过。后续提交的跨平台结果以各自的 [GitHub Actions](https://github.com/mengxiangsama/agent-orchestrator/actions) 为准，不把这次结果冒充所有未来提交的验证。
 
 关键 SHA256（保留原字节的发布夹具）：
 
