@@ -2,7 +2,7 @@
 
 简体中文 | [English](README.en.md)
 
-[![Validate skill and records](https://github.com/mengxiangsama/agent-orchestrator/actions/workflows/validate.yml/badge.svg)](https://github.com/mengxiangsama/agent-orchestrator/actions/workflows/validate.yml)
+[![Validate skill and records](https://github.com/mengxiangsama/codex-agent-orchestration-skill/actions/workflows/validate.yml/badge.svg)](https://github.com/mengxiangsama/codex-agent-orchestration-skill/actions/workflows/validate.yml)
 
 <p align="center"><img src="assets/agent-orchestrator-mark.svg" alt="Agent Orchestrator：主智能体协调多个子智能体" width="180"></p>
 
@@ -23,7 +23,7 @@ A Codex multi-agent orchestration skill for task planning, subagent delegation, 
 在提供 `skill-installer` 的 Codex 环境中发送：
 
 ```text
-使用 $skill-installer 从 https://github.com/mengxiangsama/agent-orchestrator 安装仓库根目录的 agent-orchestrator Skill。已有同名安装时先检查，不要直接覆盖。
+使用 $skill-installer 从 https://github.com/mengxiangsama/codex-agent-orchestration-skill 安装仓库根目录的 agent-orchestrator Skill。已有同名安装时先检查，不要直接覆盖。
 ```
 
 安装后，在你的项目中提出任务，例如：
@@ -66,13 +66,13 @@ A Codex multi-agent orchestration skill for task planning, subagent delegation, 
 macOS / Linux：
 
 ```bash
-git clone https://github.com/mengxiangsama/agent-orchestrator.git "$HOME/.agents/skills/agent-orchestrator"
+git clone https://github.com/mengxiangsama/codex-agent-orchestration-skill.git "$HOME/.agents/skills/agent-orchestrator"
 ```
 
 Windows PowerShell（本项目安装不需要 Bash）：
 
 ```powershell
-git clone https://github.com/mengxiangsama/agent-orchestrator.git "$env:USERPROFILE\.agents\skills\agent-orchestrator"
+git clone https://github.com/mengxiangsama/codex-agent-orchestration-skill.git "$env:USERPROFILE\.agents\skills\agent-orchestrator"
 ```
 
 发现列表未更新时，刷新列表或新开会话；仍不显示再重启客户端。检查扫描目录下是否确实存在 `agent-orchestrator/SKILL.md`。WSL 与 Windows 的用户目录不同。

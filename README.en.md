@@ -2,7 +2,7 @@
 
 [中文说明](README.md)
 
-[![Validate skill and records](https://github.com/mengxiangsama/agent-orchestrator/actions/workflows/validate.yml/badge.svg)](https://github.com/mengxiangsama/agent-orchestrator/actions/workflows/validate.yml)
+[![Validate skill and records](https://github.com/mengxiangsama/codex-agent-orchestration-skill/actions/workflows/validate.yml/badge.svg)](https://github.com/mengxiangsama/codex-agent-orchestration-skill/actions/workflows/validate.yml)
 
 <p align="center"><img src="assets/agent-orchestrator-mark.svg" alt="Agent Orchestrator coordinating multiple agents" width="180"></p>
 
@@ -16,7 +16,7 @@ If your host provides `$skill-installer`, paste this request:
 
 ```text
 Use $skill-installer to install the skill named agent-orchestrator from the
-repository root (path .) of https://github.com/mengxiangsama/agent-orchestrator.
+repository root (path .) of https://github.com/mengxiangsama/codex-agent-orchestration-skill.
 Confirm which local skill directory this host supports before installing.
 If a copy already exists, preserve it and report its location; do not overwrite
 it or install a duplicate.
@@ -69,13 +69,13 @@ If an installation in `~/.codex/skills` or another directory already works, keep
 For a new installation on macOS or Linux:
 
 ```bash
-git clone https://github.com/mengxiangsama/agent-orchestrator.git "$HOME/.agents/skills/agent-orchestrator"
+git clone https://github.com/mengxiangsama/codex-agent-orchestration-skill.git "$HOME/.agents/skills/agent-orchestrator"
 ```
 
 For a new installation in Windows PowerShell:
 
 ```powershell
-git clone https://github.com/mengxiangsama/agent-orchestrator.git "$env:USERPROFILE\.agents\skills\agent-orchestrator"
+git clone https://github.com/mengxiangsama/codex-agent-orchestration-skill.git "$env:USERPROFILE\.agents\skills\agent-orchestrator"
 ```
 
 If the destination already exists, inspect it first to determine whether it is a previous clone or a customized copy. Preserve local changes; do not overwrite the directory or force-reset it to resolve an update conflict.
