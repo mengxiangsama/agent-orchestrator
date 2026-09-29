@@ -1,0 +1,9 @@
+{
+  "command": "python3 -B -c 'import json; from pathlib import Path; print(json.loads(Path(\"fixtures/records.json\").read_text(encoding=\"utf-8\")))'",
+  "cwd": "<TEMP_WORKSPACE>",
+  "chunk_id": "35eca7",
+  "wall_time_seconds": 0.022047416,
+  "exit_code": 0,
+  "original_token_count": 35,
+  "output": "[{'id': 5, 'label': 'five'}, {'id': 1, 'label': 'one'}, {'id': 4, 'label': 'four'}, {'id': 2, 'label': 'two'}, {'id': 3, 'label': 'three'}]\n"
+}

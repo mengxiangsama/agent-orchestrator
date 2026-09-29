@@ -139,6 +139,10 @@ The [validation report dated 2026-09-28](evals/reports/validation.md) records 81
 
 The report also describes observed host subagent calls, design acceptance before implementation, parallel work, and bounded rework. It distinguishes deliberately injected failures and delegation restrictions from naturally occurring errors. The public record summarizes those observations; it is not an independently authenticated raw tool trace.
 
+The additional [pagination orchestration exercise dated 2026-09-29](evals/artifacts/pagination/report.md) preserves a rejected design, its accepted revision, a real missing-input failure, recovery before a second implementation attempt, and main-agent acceptance. Its 17 implementation tests plus 20 independent tests pass in the original local run. The 150 seeded cases are subcases of one method, not 150 extra tests. Both injected faults were known in advance; a separate patch-tool error is also disclosed.
+
+Use the [reusable exercise request](evals/pagination-prompt.md) in a new temporary directory to evaluate actual delegation, or follow the report's commands to rerun the published Python tests offline. CI runs artifact tests and record checks, not real model orchestration. Public logs have local paths redacted and are not authenticated raw tool traces. This addition does not change the skill's core instructions.
+
 Package checks validate metadata, links, and resources. Ledger checks validate internal consistency of recorded states, dependencies, versions, ownership, and budgets. Neither proves that tool calls happened or that business behavior is correct. The implemented fixture covers quote calculation only; the full order/payment walkthrough is a teaching example, not an implemented or production-tested payment system.
 
 ## Project navigation
@@ -153,6 +157,8 @@ Package checks validate metadata, links, and resources. Ledger checks validate i
 - [Ledger checker](scripts/check_ledger.py): optional record consistency checks.
 - [Evaluation guide](evals/README.md): evaluation scenarios and evidence boundaries.
 - [Dated validation report](evals/reports/validation.md): observed results, reproduction commands, and unverified areas.
+- [Pagination exercise and evidence](evals/artifacts/pagination/report.md): two-attempt design rework, dependency gating, failure/recovery, and 37 executable tests.
+- [Reusable pagination exercise request](evals/pagination-prompt.md): a known-fault exercise for a host with actual subagent tools.
 
 The core rules and supporting guides are currently written in Chinese; this README provides an English entry point.
 

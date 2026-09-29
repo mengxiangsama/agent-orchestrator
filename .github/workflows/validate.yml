@@ -28,3 +28,10 @@ jobs:
         working-directory: evals/artifacts/coupon
       - run: python -B -m unittest discover -s oracle -v
         working-directory: evals/artifacts/coupon
+      - run: python scripts/check_ledger.py evals/artifacts/pagination/run.json
+      - run: python -B qa/check_evidence.py
+        working-directory: evals/artifacts/pagination
+      - run: python -B -m unittest discover -s tests -v
+        working-directory: evals/artifacts/pagination
+      - run: python -B -m unittest discover -s qa -v
+        working-directory: evals/artifacts/pagination

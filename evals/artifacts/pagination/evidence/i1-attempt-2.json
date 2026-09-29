@@ -1,0 +1,68 @@
+{
+  "task": "I1",
+  "attempt": 2,
+  "prerequisite": "D1v1",
+  "status": "submitted",
+  "cwd": "<TEMP_WORKSPACE>",
+  "input_read": {
+    "command": "python3 -B -c 'import json; from pathlib import Path; print(json.loads(Path(\"fixtures/records.json\").read_text(encoding=\"utf-8\")))'",
+    "exit_code": 0,
+    "output": "[{'id': 5, 'label': 'five'}, {'id': 1, 'label': 'one'}, {'id': 4, 'label': 'four'}, {'id': 2, 'label': 'two'}, {'id': 3, 'label': 'three'}]\n"
+  },
+  "prerequisite_verification": {
+    "requirements_read": {
+      "command": "sed -n '1,240p' requirements.md",
+      "exit_code": 0
+    },
+    "design_read": {
+      "command": "sed -n '1,300p' docs/design-v1.md",
+      "exit_code": 0
+    },
+    "acceptance_read": {
+      "command": "sed -n '1,200p' evidence/d1-acceptance-v1.md",
+      "exit_code": 0
+    },
+    "hash_command": "shasum -a 256 docs/design-v1.md fixtures/records.json",
+    "exit_code": 0,
+    "output": "6a0fe8ec5b6edd62507486e73f3cf4941e809659e48e61ac700f9c8681647387  docs/design-v1.md\ned5c433fce91e49fb48643f1d0bb8a86801ffc72c205d0f7106401a6456cec7b  fixtures/records.json\n",
+    "expected_design_sha256": "6a0fe8ec5b6edd62507486e73f3cf4941e809659e48e61ac700f9c8681647387",
+    "expected_fixture_sha256": "ed5c433fce91e49fb48643f1d0bb8a86801ffc72c205d0f7106401a6456cec7b",
+    "matches_expected": true
+  },
+  "self_test": {
+    "command": "python3 -B -m unittest discover -s tests -p 'test_*.py' -v",
+    "exit_code": 0,
+    "output": "test_a10_negative_zero_duplicate_ids_and_stability (test_pagination.PaginationTests.test_a10_negative_zero_duplicate_ids_and_stability) ... ok\ntest_a11_preserves_input_and_extra_fields (test_pagination.PaginationTests.test_a11_preserves_input_and_extra_fields) ... ok\ntest_a1_to_a9_pagination_boundaries (test_pagination.PaginationTests.test_a1_to_a9_pagination_boundaries) ... ok\ntest_container_subclasses_are_allowed (test_pagination.PaginationTests.test_container_subclasses_are_allowed) ... ok\ntest_e10_records_outside_page_still_validated (test_pagination.PaginationTests.test_e10_records_outside_page_still_validated) ... ok\ntest_e11_invalid_input_is_unchanged (test_pagination.PaginationTests.test_e11_invalid_input_is_unchanged) ... ok\ntest_e1_invalid_record_containers (test_pagination.PaginationTests.test_e1_invalid_record_containers) ... ok\ntest_e2_invalid_record_elements (test_pagination.PaginationTests.test_e2_invalid_record_elements) ... ok\ntest_e3_missing_id (test_pagination.PaginationTests.test_e3_missing_id) ... ok\ntest_e4_invalid_id_types (test_pagination.PaginationTests.test_e4_invalid_id_types) ... ok\ntest_e5_invalid_pages (test_pagination.PaginationTests.test_e5_invalid_pages) ... ok\ntest_e6_invalid_page_sizes (test_pagination.PaginationTests.test_e6_invalid_page_sizes) ... ok\ntest_e7_integer_subclasses_rejected (test_pagination.PaginationTests.test_e7_integer_subclasses_rejected) ... ok\ntest_e8_empty_input_still_validates_parameters (test_pagination.PaginationTests.test_e8_empty_input_still_validates_parameters) ... ok\ntest_e9_out_of_range_still_validates_records (test_pagination.PaginationTests.test_e9_out_of_range_still_validates_records) ... ok\ntest_fixture_second_page_preserves_labels (test_pagination.PaginationTests.test_fixture_second_page_preserves_labels) ... ok\ntest_validation_finishes_before_sorting (test_pagination.PaginationTests.test_validation_finishes_before_sorting) ... ok\n\n----------------------------------------------------------------------\nRan 17 tests in 0.004s\n\nOK\n",
+    "test_methods": 17,
+    "coverage": [
+      "A1-A11",
+      "E1-E11",
+      "container subclasses accepted",
+      "complete validation before sorting",
+      "fixture second page with labels"
+    ]
+  },
+  "changes": [
+    {
+      "path": "pagination.py",
+      "action": "added"
+    },
+    {
+      "path": "tests/test_pagination.py",
+      "action": "added"
+    },
+    {
+      "path": "evidence/i1-attempt-2.json",
+      "action": "added"
+    }
+  ],
+  "pending": [
+    "Main agent independent acceptance"
+  ],
+  "independent_qa_read": false,
+  "unverified": [
+    "Main agent independent QA has not been run by this implementing agent"
+  ],
+  "scope_deviations": [],
+  "further_attempts_authorized": false
+}

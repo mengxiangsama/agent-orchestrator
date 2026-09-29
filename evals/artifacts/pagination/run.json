@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "mode": "implement",
+  "limits": {
+    "max_active": 2,
+    "max_attempts": 2
+  },
+  "tasks": [
+    {
+      "id": "D1",
+      "owner": "/root/pagination_design_test",
+      "depends_on": [],
+      "write_paths": [
+        "docs/design-attempt-1.md",
+        "docs/design-v1.md"
+      ],
+      "deliverables": [
+        "docs/design-attempt-1.md",
+        "docs/design-v1.md"
+      ],
+      "acceptance": [
+        "R1-R6 and invalid input contract present; main reads design; max two attempts"
+      ]
+    },
+    {
+      "id": "I1",
+      "owner": "/root/pagination_implementation_test",
+      "depends_on": [
+        "D1"
+      ],
+      "write_paths": [
+        "pagination.py",
+        "tests/",
+        "evidence/i1-attempt-1.json",
+        "evidence/i1-attempt-2.json"
+      ],
+      "deliverables": [
+        "pagination.py",
+        "tests/",
+        "evidence/i1-attempt-1.json",
+        "evidence/i1-attempt-2.json"
+      ],
+      "acceptance": [
+        "First attempt fails reading intentionally missing fixture and stops",
+        "Second attempt uses accepted D1 v1 and passes independent tests"
+      ]
+    },
+    {
+      "id": "M1",
+      "owner": "main",
+      "depends_on": [
+        "D1",
+        "I1"
+      ],
+      "write_paths": [
+        "report.md",
+        "traceability.md"
+      ],
+      "deliverables": [
+        "report.md",
+        "traceability.md"
+      ],
+      "acceptance": [
+        "Main reruns tests; rules/design/tests mapped; actual errors and limitations preserved"
+      ]
+    }
+  ],
+  "events": [
+    {
+      "task": "D1",
+      "event": "start",
+      "actor": "main",
+      "inputs": {}
+    },
+    {
+      "task": "D1",
+      "event": "submit",
+      "actor": "/root/pagination_design_test",
+      "evidence": [
+        "docs/design-attempt-1.md; actual child FINAL_ANSWER submitted"
+      ]
+    },
+    {
+      "task": "D1",
+      "event": "reject",
+      "actor": "main",
+      "reason": "requirements.md R4 requires ValueError(INVALID_ARGUMENT), but docs/design-attempt-1.md lines 9 and 23-48 specify only valid inputs/boundaries and omit invalid input handling and tests.",
+      "evidence": [
+        "evidence/d1-rejection.md",
+        "docs/design-attempt-1.md"
+      ]
+    },
+    {
+      "task": "D1",
+      "event": "start",
+      "actor": "main",
+      "inputs": {},
+      "reason": "Attempt 2: repair independently verified R4 omission; preserve rejected snapshot."
+    },
+    {
+      "task": "D1",
+      "event": "submit",
+      "actor": "/root/pagination_design_test",
+      "evidence": [
+        "docs/design-v1.md; child FINAL_ANSWER attempt 2 submitted"
+      ]
+    },
+    {
+      "task": "D1",
+      "event": "accept",
+      "actor": "main",
+      "revision": 1,
+      "evidence": [
+        "evidence/d1-acceptance-v1.md",
+        "docs/design-v1.md SHA256 6a0fe8ec5b6edd62507486e73f3cf4941e809659e48e61ac700f9c8681647387"
+      ]
+    },
+    {
+      "task": "I1",
+      "event": "start",
+      "actor": "main",
+      "inputs": {
+        "D1": 1
+      }
+    },
+    {
+      "task": "I1",
+      "event": "fail",
+      "actor": "main",
+      "reason": "Actual first probe exited 1 with FileNotFoundError for intentionally missing fixtures/records.json; list_agents confirms completed; main reproduced same failure.",
+      "evidence": [
+        "evidence/i1-attempt-1.json",
+        "evidence/main-missing-input-probe.json"
+      ]
+    },
+    {
+      "task": "I1",
+      "event": "start",
+      "actor": "main",
+      "inputs": {
+        "D1": 1
+      },
+      "reason": "Attempt2 after main confirmed stop, reproduced missing-file exit1, created authorized fixture and verified read exit0; design v1 hash unchanged."
+    },
+    {
+      "task": "I1",
+      "event": "submit",
+      "actor": "/root/pagination_implementation_test",
+      "evidence": [
+        "pagination.py",
+        "tests/test_pagination.py",
+        "evidence/i1-attempt-2.json"
+      ]
+    },
+    {
+      "task": "I1",
+      "event": "accept",
+      "actor": "main",
+      "revision": 1,
+      "evidence": [
+        "evidence/i1-acceptance-v1.md",
+        "evidence/main-validation-1.json",
+        "evidence/main-validation-2.json"
+      ]
+    },
+    {
+      "task": "M1",
+      "event": "start",
+      "actor": "main",
+      "inputs": {
+        "D1": 1,
+        "I1": 1
+      }
+    },
+    {
+      "task": "M1",
+      "event": "submit",
+      "actor": "main",
+      "evidence": [
+        "report.md",
+        "traceability.md",
+        "evidence/main-integration-tests.json"
+      ]
+    },
+    {
+      "task": "M1",
+      "event": "accept",
+      "actor": "main",
+      "revision": 1,
+      "evidence": [
+        "Main re-read complete report and traceability; R1-R6 all mapped; combined37 tests exit0; no symlinks; historical hash invariants passed."
+      ]
+    }
+  ]
+}

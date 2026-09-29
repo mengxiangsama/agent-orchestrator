@@ -145,6 +145,10 @@ flowchart TD
 
 这是优惠券支付示例中的**报价子场景**，不是完整支付系统或生产部署；已有结果不保证其他模型、客户端或未来任务都成功。完整复测命令与未验证部分见报告。
 
+新增 [2026-09-29 分页编排演练](evals/artifacts/pagination/report.md)：真实 D1 设计拒收返工、设计验收后才启动 I1、缺文件失败后恢复并重试，最后通过 17 项实现测试和 20 项独立测试。保留了拒绝首稿、脱敏错误输出、尝试次数、依赖版本与规则验收对应表；明确区分已知故障注入、普通工具错误和未覆盖场景。
+
+可复制[演练请求](evals/pagination-prompt.md)在新临时目录复测编排，也可按报告命令离线运行 37 项分页测试。CI 只复测公开文件，不代替真实子智能体演练。
+
 ## 项目内容
 
 | 文件 | 用途 |
@@ -158,7 +162,9 @@ flowchart TD
 | [examples/coupon-order-payment.md](examples/coupon-order-payment.md) | 合成业务案例，不绑定具体语言 |
 | [scripts/check_ledger.py](scripts/check_ledger.py) | 可选的记录一致性检查器，不是调度程序 |
 | [evals/README.md](evals/README.md) | 行为评估方法、场景与证据边界 |
-| [evals/reports/validation.md](evals/reports/validation.md) | 本次真实验证结果及未验证部分 |
+| [evals/reports/validation.md](evals/reports/validation.md) | 2026-09-28 真实验证结果及未验证部分 |
+| [evals/artifacts/pagination/report.md](evals/artifacts/pagination/report.md) | 2026-09-29 分页编排演练、失败恢复证据与复测命令 |
+| [evals/pagination-prompt.md](evals/pagination-prompt.md) | 可复制的隔离故障注入测试请求 |
 
 ## 验证
 

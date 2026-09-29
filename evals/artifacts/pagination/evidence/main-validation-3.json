@@ -1,0 +1,9 @@
+{
+  "command": "python3 -B qa/check_evidence.py",
+  "cwd": "<TEMP_WORKSPACE>",
+  "chunk_id": "2126f9",
+  "wall_time_seconds": 0.000012417,
+  "exit_code": 0,
+  "original_token_count": 52,
+  "output": "PASS: dependency ordering, two-attempt limits, rejected design, failure/recovery, immutable evidence hashes\nLIMIT: checks record/file consistency only; tool-call authenticity remains in conversation trace\n"
+}
