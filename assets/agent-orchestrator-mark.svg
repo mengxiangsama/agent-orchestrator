@@ -1,50 +1,32 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title description">
   <title id="title">Agent Orchestrator</title>
-  <desc id="description">A coordinating hub connects three agents and verifies their work.</desc>
+  <desc id="description">An abstract coordination mark: a central decision point linked to three independent agents.</desc>
   <defs>
-    <linearGradient id="ring" x1="78" y1="78" x2="434" y2="434" gradientUnits="userSpaceOnUse">
+    <linearGradient id="orbit" x1="92" y1="92" x2="420" y2="420" gradientUnits="userSpaceOnUse">
       <stop stop-color="#42D6C4"/>
       <stop offset="1" stop-color="#4A8DFF"/>
     </linearGradient>
-    <linearGradient id="hub" x1="186" y1="178" x2="326" y2="326" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#153B55"/>
-      <stop offset="1" stop-color="#102A43"/>
+    <linearGradient id="core" x1="190" y1="184" x2="326" y2="328" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1E6D82"/>
+      <stop offset="1" stop-color="#263F82"/>
     </linearGradient>
-    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%" color-interpolation-filters="sRGB">
-      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#0B2338" flood-opacity=".13"/>
-    </filter>
   </defs>
 
-  <!-- Open orbit: coordination stays flexible, while the arrow marks review and return. -->
-  <path d="M382 120a190 190 0 1 1-250-8" fill="none" stroke="url(#ring)" stroke-width="18" stroke-linecap="round"/>
-  <path d="m104 92 37 4-14 34" fill="none" stroke="#42D6C4" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M388 105a190 190 0 0 1 39 73" fill="none" stroke="#4A8DFF" stroke-width="18" stroke-linecap="round"/>
+  <!-- One open orbit suggests coordination without imposing a fixed sequence. -->
+  <path d="M385 151a174 174 0 1 1-234-24" fill="none" stroke="url(#orbit)" stroke-width="22" stroke-linecap="round"/>
+  <path d="m125 91 31 29-39 9" fill="none" stroke="#42D6C4" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Delegation paths. -->
-  <path d="M222 207 153 145M290 207l69-62M256 321v66" fill="none" stroke="#8AA8B9" stroke-width="12" stroke-linecap="round"/>
-  <path d="M213 238 163 192M299 238l50-46M256 316v40" fill="none" stroke="#42D6C4" stroke-width="7" stroke-linecap="round"/>
+  <!-- Three paths converge on a shared decision point. -->
+  <path d="m172 166 57 57m111-57-57 57m-27 122v-79" fill="none" stroke="#91AFC1" stroke-width="17" stroke-linecap="round"/>
+  <circle cx="256" cy="256" r="69" fill="url(#core)"/>
+  <path d="m256 211 45 45-45 45-45-45z" fill="#F4FBFF"/>
+  <circle cx="256" cy="256" r="12" fill="#42D6C4"/>
 
-  <!-- Lead agent hub. -->
-  <g filter="url(#shadow)">
-    <circle cx="256" cy="260" r="84" fill="url(#hub)"/>
-    <circle cx="256" cy="260" r="68" fill="none" stroke="#FFFFFF" stroke-opacity=".13" stroke-width="2"/>
-  </g>
-  <circle cx="256" cy="242" r="17" fill="#F4FBFF"/>
-  <path d="M219 293c5-25 19-38 37-38s32 13 37 38" fill="none" stroke="#F4FBFF" stroke-width="13" stroke-linecap="round"/>
-  <path d="M231 307h50" stroke="#42D6C4" stroke-width="7" stroke-linecap="round"/>
-
-  <!-- Three independent agents. -->
-  <g filter="url(#shadow)">
-    <rect x="91" y="76" width="90" height="80" rx="24" fill="#FFFFFF"/>
-    <rect x="331" y="76" width="90" height="80" rx="24" fill="#FFFFFF"/>
-    <rect x="211" y="365" width="90" height="80" rx="24" fill="#FFFFFF"/>
-  </g>
-  <g fill="none" stroke="#17394F" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M116 111h40M116 128h27"/>
-    <path d="M357 111h40M357 128h27"/>
-    <path d="M237 400h40M237 417h27"/>
-  </g>
-  <circle cx="153" cy="145" r="8" fill="#42D6C4"/>
-  <circle cx="359" cy="145" r="8" fill="#4A8DFF"/>
-  <circle cx="256" cy="386" r="8" fill="#42D6C4"/>
+  <!-- Minimal satellite nodes; no literal people or message cards. -->
+  <circle cx="158" cy="152" r="27" fill="#F4FBFF"/>
+  <circle cx="354" cy="152" r="27" fill="#F4FBFF"/>
+  <circle cx="256" cy="374" r="27" fill="#F4FBFF"/>
+  <circle cx="158" cy="152" r="10" fill="#42D6C4"/>
+  <circle cx="354" cy="152" r="10" fill="#4A8DFF"/>
+  <circle cx="256" cy="374" r="10" fill="#42D6C4"/>
 </svg>
