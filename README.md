@@ -4,6 +4,8 @@
 
 [![Validate skill and records](https://github.com/mengxiangsama/agent-orchestrator/actions/workflows/validate.yml/badge.svg)](https://github.com/mengxiangsama/agent-orchestrator/actions/workflows/validate.yml)
 
+<p align="center"><img src="assets/agent-orchestrator-mark.svg" alt="Agent Orchestrator：主智能体协调多个子智能体" width="180"></p>
+
 **你说目标，主智能体按需拆任务、调度子智能体、验收成果，再统一交付。**
 
 `agent-orchestrator` 是适用于 Codex 的通用多智能体协作 Skill，封装任务拆分、子智能体调度、依赖管理、并行执行和成果验收规则。适合需要协调多个 coding agents 的开发、文档和代码审查任务，不限定 Java、Python、JavaScript 或某个业务领域。

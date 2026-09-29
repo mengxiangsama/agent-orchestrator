@@ -4,6 +4,8 @@
 
 [![Validate skill and records](https://github.com/mengxiangsama/agent-orchestrator/actions/workflows/validate.yml/badge.svg)](https://github.com/mengxiangsama/agent-orchestrator/actions/workflows/validate.yml)
 
+<p align="center"><img src="assets/agent-orchestrator-mark.svg" alt="Agent Orchestrator coordinating multiple agents" width="180"></p>
+
 Agent Orchestrator helps a lead agent break down a task, delegate to subagents, coordinate independent work in parallel, and check deliverables before handing back a result. It keeps analysis, design, implementation, and review within the scope you requested. Its orchestration rules are independent of programming language and domain; they are not tied to Java or any particular stack.
 
 This repository provides a **Codex skill containing orchestration rules**. The host provides the actual multi-agent tools, execution permissions, workspace isolation, and resource limits. Installing the skill does not add those capabilities. Simple or tightly coupled tasks stay with the lead agent; when delegation tools or authorization are missing, it explains the limitation and works through the stages itself.
