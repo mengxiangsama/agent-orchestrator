@@ -51,6 +51,7 @@ A Codex multi-agent orchestration skill for task planning, subagent delegation, 
 - 独立任务并行；前置成果**主验收通过**后才启动依赖任务。
 - 划分写入所有权，避免多个执行者同时修改同一文件。
 - 区分执行者提交和主智能体验收，按具体问题有限返工。
+- 高风险改动安排非实现者独立审查，小任务不强制增加角色；修复后定向复查。
 - 前置设计改变后暂停、通知受影响任务并重新验收。
 - 工具缺失时明确降级为单智能体，不假装已经派发。
 
@@ -138,6 +139,12 @@ flowchart TD
 
 默认只有主智能体派发，每任务最多两次执行尝试；有具体新证据才调整预算。这个策略不意味着宿主固定支持两名子智能体。没有暴露并发上限时必须承认未知，不能编造平台参数。
 
+### 按风险审查，不固定增加角色
+
+普通小改动由主智能体核验；改变资金结果、权限边界、数据完整性或关键共享契约等高风险行为时，安排未参与该改动实现的审查者。用户明确要求独立审查时同样遵守。审查者拿到具体需求、稳定候选与实际差异、对应版本的测试证据，不只看实现者摘要。
+
+发现问题后只向责任任务返工，复查原问题、修复差异和受影响回归；契约或影响面扩大时扩展审查。主智能体保留最终验收权，所有必要验收与复查完成后仍做整体集成。没有独立审查能力时明确披露缺口，不把自查称为独立审查，也不提前放行高风险成果。详见 [审查流程与模板](references/review.md) 和 [使用示例](examples/risk-based-review.md)。
+
 ## 看一次真实验收
 
 [2026-09-28 验证报告](evals/reports/validation.md) 记录了隔离合成任务中的真实工具调用和文件检查，包括两个任务并行、设计验收后编码、故障注入后的返工，以及只设计不实现的边界。
@@ -163,8 +170,10 @@ flowchart TD
 | [references/dispatch.md](references/dispatch.md) | 自包含任务、成果返回、返工模板 |
 | [references/ledger.md](references/ledger.md) | 轻量状态表和可选 JSON 记录契约 |
 | [references/acceptance.md](references/acceptance.md) | 主验收和最终报告模板 |
+| [references/review.md](references/review.md) | 风险判断、独立审查包、问题记录与定向复查 |
 | [references/parallel-boundaries.md](references/parallel-boundaries.md) | 通用模块契约、独立并行、滚动验收与真实集成 |
 | [examples/scenarios.md](examples/scenarios.md) | 简单、并行、失败、返工和设计模式示例 |
+| [examples/risk-based-review.md](examples/risk-based-review.md) | 小任务直接核验、高风险审查、证据失效与复查示例 |
 | [examples/coupon-order-payment.md](examples/coupon-order-payment.md) | 合成业务案例，不绑定具体语言 |
 | [scripts/check_ledger.py](scripts/check_ledger.py) | 可选的记录一致性检查器，不是调度程序 |
 | [evals/README.md](evals/README.md) | 行为评估方法、场景与证据边界 |

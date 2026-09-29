@@ -116,6 +116,14 @@ Parallelism is not limited to frontend/backend roles. Two backend modules, such 
 
 One lead agent retains control of planning, dispatch, rework, acceptance, and integration. Workers execute their assigned tasks and report cross-task issues to the lead; parallel execution does not give them authority to direct other workers.
 
+## Risk-based independent review
+
+Small, low-risk changes stay with the lead for verification; an extra reviewer is not mandatory for every task. Changes that materially affect monetary results, authorization boundaries, data integrity, or critical shared contracts require a reviewer who did not implement that change. Honor explicit user requests for independent review as well. Assess actual impact, not directory names or line counts.
+
+The review brief includes the original requirements, accepted contracts, a stable candidate and baseline, the actual diff, and version-matched test evidence. The reviewer reports findings; only the lead accepts the deliverable. A submitted candidate may be inspected during acceptance, but it is not yet an accepted prerequisite for downstream implementation.
+
+After fixes, recheck the original findings, fix diff, and affected regressions. Expand review if the contract or impact changes; unaffected tasks can continue. Re-review does not reset the implementation attempt budget, and review approval does not replace final integration checks. If independent review is unavailable, disclose the unmet gate rather than calling self-review independent or accepting the high-risk result prematurely. See the [review procedure and templates](references/review.md) and [teaching examples](examples/risk-based-review.md).
+
 ## Verification you can run
 
 Using the skill instructions does not require Python. The optional validators and repository tests require Python 3.9+ and use only the standard library.
@@ -158,6 +166,7 @@ The [module-parallelism regression tests](tests/test_parallel_contract.py) exerc
 - [Dispatch and return templates](references/dispatch.md): task briefs, submissions, and rework messages.
 - [Task ledger](references/ledger.md): task states, dependency versions, and the optional JSON record format.
 - [Acceptance and reporting](references/acceptance.md): inspect deliverables and report verified outcomes.
+- [Risk-based review](references/review.md): choose review depth, prepare evidence, and recheck fixes.
 - [Collaboration boundaries and parallel work](references/parallel-boundaries.md): shared contracts, independent modules, rolling acceptance, and real integration.
 - [Scenarios](examples/scenarios.md): simple tasks, parallel work, rework, failure, and restricted capabilities.
 - [Coupon order payment walkthrough](examples/coupon-order-payment.md): synthetic design-to-implementation handoff and a design-only branch.
