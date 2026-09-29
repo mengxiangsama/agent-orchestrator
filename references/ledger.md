@@ -11,6 +11,8 @@
 
 依赖不是“文件出现就能开始”：前置必须 accepted，执行者须明确收到对应版本。作废前置前先停止受影响的 running/submitted 任务；对子孙任务清除旧验收，通知变更并重验。仅静态相同的文件路径不能证明版本一致。
 
+共享契约已足以独立实现时，将实现 A、B 都依赖契约 C，再让集成 I 依赖 A、B；不要仅因 B 最终调用 A 就把开发记录写成 C → A → B。A/B 可分别验收或返工，不设置整批关卡。`accepted` 的范围由各任务验收条件决定，单个模块 accepted 不等于集成 I accepted。规则与示例见 [协作边界与并行](parallel-boundaries.md)。
+
 ## 可选 JSON 检查格式（schema_version 1）
 
 需要检查依赖图、状态转移、并发和写入冲突时，可用 `python3 scripts/check_ledger.py run.json`。该脚本**只验证记录内部一致性**，不调用工具、不执行任务、不读取交付物，不证明日志/agent ID真实，不验证业务语义，也不自动恢复。

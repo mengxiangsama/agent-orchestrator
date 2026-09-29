@@ -112,6 +112,10 @@ The lead agent handles simple work directly. For larger work, it delegates only 
 
 See the [dispatch templates](references/dispatch.md), [task ledger](references/ledger.md), and [acceptance checklist](references/acceptance.md) for the working details.
 
+Parallelism is not limited to frontend/backend roles. Two backend modules, such as coupon calculation and order creation, can share an accepted method contract and implement independently in separate files. A runtime call between them is not automatically a development dependency. Review each result as it arrives, return specific issues to its owner while unaffected work continues, and integrate the real implementations only after both pass their own acceptance criteria. Contract-based mocks or stubs support module tests but do not prove integration. Actual prerequisite artifacts, conflicting writes, or host limits may still require waiting or serial execution. See [collaboration boundaries and parallel work](references/parallel-boundaries.md).
+
+One lead agent retains control of planning, dispatch, rework, acceptance, and integration. Workers execute their assigned tasks and report cross-task issues to the lead; parallel execution does not give them authority to direct other workers.
+
 ## Verification you can run
 
 Using the skill instructions does not require Python. The optional validators and repository tests require Python 3.9+ and use only the standard library.
@@ -145,6 +149,8 @@ Use the [reusable exercise request](evals/pagination-prompt.md) in a new tempora
 
 Package checks validate metadata, links, and resources. Ledger checks validate internal consistency of recorded states, dependencies, versions, ownership, and budgets. Neither proves that tool calls happened or that business behavior is correct. The implemented fixture covers quote calculation only; the full order/payment walkthrough is a teaching example, not an implemented or production-tested payment system.
 
+The [module-parallelism regression tests](tests/test_parallel_contract.py) exercise synthetic records for contract acceptance, parallel modules, completion-order acceptance, local rework, integration gating, and contract changes. They do not run agents or demonstrate a real order-system integration.
+
 ## Project navigation
 
 - [SKILL.md](SKILL.md): invocation description and core orchestration rules.
@@ -152,6 +158,7 @@ Package checks validate metadata, links, and resources. Ledger checks validate i
 - [Dispatch and return templates](references/dispatch.md): task briefs, submissions, and rework messages.
 - [Task ledger](references/ledger.md): task states, dependency versions, and the optional JSON record format.
 - [Acceptance and reporting](references/acceptance.md): inspect deliverables and report verified outcomes.
+- [Collaboration boundaries and parallel work](references/parallel-boundaries.md): shared contracts, independent modules, rolling acceptance, and real integration.
 - [Scenarios](examples/scenarios.md): simple tasks, parallel work, rework, failure, and restricted capabilities.
 - [Coupon order payment walkthrough](examples/coupon-order-payment.md): synthetic design-to-implementation handoff and a design-only branch.
 - [Ledger checker](scripts/check_ledger.py): optional record consistency checks.

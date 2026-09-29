@@ -40,6 +40,7 @@ A Codex multi-agent orchestration skill for task planning, subagent delegation, 
 | --- | --- |
 | 修正一处文档或小问题 | 主智能体直接完成，不强行拆分 |
 | 开发功能并补独立文档 | 按真实依赖和文件所有权决定能否并行 |
+| 多个模块协同开发，如优惠券计算 + 订单创建 | 先统一必要契约，各模块独立并行实现、先完成先验收，最后真实集成 |
 | 设计后再实现一个模块 | 主智能体验收设计后，才启动依赖设计的编码任务 |
 | 只审查代码或只做设计 | 交付问题报告或方案，不擅自修改业务代码 |
 
@@ -131,6 +132,10 @@ flowchart TD
 4. 子智能体返回 `submitted`；主智能体打开交付物、核对证据。
 5. 接受、返工或说明阻塞；必要集成检查后报告结果。
 
+并行不限于前端和后端，也适用于同一后端的方法或模块。**最终有调用关系，不代表开发必须串行。** 例如优惠券计算与订单创建可以共同依赖已验收的方法契约，各自完整实现和测试；调用方可用契约替身。谁先提交先验收，只向有问题的任务返工，不等另一边；最后核对两个真实模块的整体行为。实际前置产物未就绪、写入冲突或工具额度不足时，才按具体原因等待或串行。详见 [协作边界与并行](references/parallel-boundaries.md)。
+
+模式仍是一个主智能体统一控制多个子智能体：主智能体负责决策、派发和验收，子智能体专注本任务，跨任务问题上报主智能体协调，不自行调动其他智能体。
+
 默认只有主智能体派发，每任务最多两次执行尝试；有具体新证据才调整预算。这个策略不意味着宿主固定支持两名子智能体。没有暴露并发上限时必须承认未知，不能编造平台参数。
 
 ## 看一次真实验收
@@ -158,6 +163,7 @@ flowchart TD
 | [references/dispatch.md](references/dispatch.md) | 自包含任务、成果返回、返工模板 |
 | [references/ledger.md](references/ledger.md) | 轻量状态表和可选 JSON 记录契约 |
 | [references/acceptance.md](references/acceptance.md) | 主验收和最终报告模板 |
+| [references/parallel-boundaries.md](references/parallel-boundaries.md) | 通用模块契约、独立并行、滚动验收与真实集成 |
 | [examples/scenarios.md](examples/scenarios.md) | 简单、并行、失败、返工和设计模式示例 |
 | [examples/coupon-order-payment.md](examples/coupon-order-payment.md) | 合成业务案例，不绑定具体语言 |
 | [scripts/check_ledger.py](scripts/check_ledger.py) | 可选的记录一致性检查器，不是调度程序 |
@@ -182,6 +188,7 @@ Windows 将 `python3` 换为 `py -3`。CI 覆盖 Ubuntu、macOS、Windows 的 Py
 
 - **包检查**：元数据、链接和资源是否完整；不证明模型行为。
 - **确定性测试**：JSON 状态、依赖、版本、并发、所有权和预算是否一致；不证明实际工具调用或业务正确性。
+- [模块并行回归](tests/test_parallel_contract.py)：合成记录中验证契约先验收、模块并行、先完成先验收、局部返工与集成门禁；不是一次真实订单业务联调。
 - **真实行为评估**：在隔离的合成任务中观察真实子智能体调用、文件和命令结果；结果见验证报告。
 - **受限/故障注入评估**：明确标注人为禁用能力、注入失败或不合格交付物，不包装成生产事故或自然出现的模型错误。
 
